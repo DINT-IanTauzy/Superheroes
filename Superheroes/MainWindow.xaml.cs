@@ -21,11 +21,34 @@ namespace Superheroes
     /// </summary>
     public partial class MainWindow : Window
     {
+        private int posicionHereo = 0;
+        private List<Superheroe> superheroes = Superheroe.GetSamples();
         public MainWindow()
         {
             InitializeComponent();
-            List<Superheroe> superheroes = Superheroe.GetSamples();
-            DockPanelSuperheroes.DataContext = superheroes[0];
+            CambiaSuperHereo();
+        }
+
+        private void Event_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            Image i = (Image)sender;
+            if(i.Tag.ToString() == "Derecha")
+            {
+                if (posicionHereo < 2)
+                    posicionHereo++;
+            } else if (i.Tag.ToString() == "Izquierda")
+            {
+                if (posicionHereo > 0)
+                    posicionHereo--;
+            }
+
+            ConteoSuperHeroe.Text = posicionHereo+1 + "/3";
+            CambiaSuperHereo();
+        }
+
+        private void CambiaSuperHereo()
+        {
+            DockPanelSuperheroes.DataContext = superheroes[posicionHereo];
         }
     }
 }

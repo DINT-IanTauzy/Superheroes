@@ -17,13 +17,12 @@
             <Setter Property="Height" Value="65"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
             <Setter Property="Margin" Value="5"/>
-            
-            
+
         </Style>
         <Style TargetType="{x:Type TextBlock}" x:Key="NombreSuperheroe">
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Margin" Value="5"/>
-            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="FontSize" Value="40"/>
             <Setter Property="FontFamily" Value="arial black"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="Effect">
@@ -31,6 +30,11 @@
                     <DropShadowEffect></DropShadowEffect>
                 </Setter.Value>
             </Setter>
+        </Style>
+        <Style TargetType="{x:Type Image}" x:Key="Flechas">
+            <Setter Property="Width" Value="20"/>
+            <Setter Property="Source" Value="./Recursos/arrow.png"/>
+            <EventSetter Event="MouseLeftButtonUp" Handler="Event_MouseLeftButtonUp"/>
         </Style>
 
     </Window.Resources>
@@ -46,9 +50,9 @@
 
 
         <StackPanel DockPanel.Dock="Bottom" HorizontalAlignment="Center" Orientation="Horizontal">
-            <Image Source="./Recursos/arrow.png" Width="20"></Image>
-            <TextBlock Margin="2,0" FontSize="18">1/3</TextBlock>
-            <Image Source="./Recursos/arrow.png" Width="20" RenderTransformOrigin="0.5,0.5">
+            <Image Style="{StaticResource Flechas}" Tag="Izquierda"></Image>
+            <TextBlock Margin="5,0" FontSize="18" x:Name="ConteoSuperHeroe" FontWeight="Bold">1/3</TextBlock>
+            <Image Style="{StaticResource Flechas}" RenderTransformOrigin="0.5,0.5" Tag="Derecha">
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
