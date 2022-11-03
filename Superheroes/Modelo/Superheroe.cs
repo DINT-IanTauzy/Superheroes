@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
@@ -105,6 +106,11 @@ namespace Superheroes.Modelo
             ejemplos.Add(spiderman);
 
             return ejemplos;
+        }
+
+        public static implicit operator Superheroe(int v)
+        {
+            throw new NotImplementedException();
         }
     }
 }

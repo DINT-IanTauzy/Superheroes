@@ -1,4 +1,5 @@
 ﻿using Superheroes.Modelo;
+using Superheroes.VistaModelo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,34 +22,27 @@ namespace Superheroes
     /// </summary>
     public partial class MainWindow : Window
     {
-        private int posicionHereo = 0;
-        private List<Superheroe> superheroes = Superheroe.GetSamples();
+        MainWindowVM vm = new MainWindowVM();
+        
         public MainWindow()
         {
             InitializeComponent();
-            CambiaSuperHereo();
+            this.DataContext = vm;
         }
 
         private void Event_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Image i = (Image)sender;
-            if(i.Tag.ToString() == "Derecha")
+            Image flecha = (Image)sender;
+            if(flecha.Tag.ToString() == "Izquierda")
             {
-                if (posicionHereo < 2)
-                    posicionHereo++;
-            } else if (i.Tag.ToString() == "Izquierda")
+                vm.Retroceder();
+            } 
+            else
             {
-                if (posicionHereo > 0)
-                    posicionHereo--;
+                vm.Avanzar();
             }
-
-            ConteoSuperHeroe.Text = posicionHereo+1 + "/3";
-            CambiaSuperHereo();
         }
 
-        private void CambiaSuperHereo()
-        {
-            DockPanelSuperheroes.DataContext = superheroes[posicionHereo];
-        }
+        
     }
 }

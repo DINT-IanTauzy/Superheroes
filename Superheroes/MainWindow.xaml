@@ -36,22 +36,28 @@
             <Setter Property="Source" Value="./Recursos/arrow.png"/>
             <EventSetter Event="MouseLeftButtonUp" Handler="Event_MouseLeftButtonUp"/>
         </Style>
+        <Style TargetType="{x:Type TextBlock}" x:Key="PosicionHeroe">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
 
     </Window.Resources>
 
-    <DockPanel x:Name="DockPanelSuperheroes" Background="{Binding Path=Heroe, Converter={StaticResource CambiarBackground}}">
+    <DockPanel x:Name="DockPanelSuperheroes" Background="{Binding Path=Personaje.Heroe, Converter={StaticResource CambiarBackground}}">
         <DockPanel DockPanel.Dock="Top" LastChildFill="False" Margin="5,0">
-            <TextBlock DockPanel.Dock="Left" Style="{StaticResource NombreSuperheroe}" Text="{Binding Path=Nombre}" x:Name="NombreSuperheroe"></TextBlock>
+            <TextBlock DockPanel.Dock="Left" Style="{StaticResource NombreSuperheroe}" Text="{Binding Path=Personaje.Nombre}" x:Name="NombreSuperheroe"></TextBlock>
             <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
-                <Image Source="./Recursos/avengers.png" Style="{StaticResource LogosImagenes}" Visibility="{Binding Path=Vengador, Converter={StaticResource ConverterImagen}}"></Image>
-                <Image Source="./Recursos/xmen.png" Style="{StaticResource LogosImagenes}" Visibility="{Binding Path=Xmen, Converter={StaticResource ConverterImagen}}"></Image>
+                <Image Source="./Recursos/avengers.png" Style="{StaticResource LogosImagenes}" Visibility="{Binding Path=Personaje.Vengador, Converter={StaticResource ConverterImagen}}"></Image>
+                <Image Source="./Recursos/xmen.png" Style="{StaticResource LogosImagenes}" Visibility="{Binding Path=Personaje.Xmen, Converter={StaticResource ConverterImagen}}"></Image>
             </StackPanel>
         </DockPanel>
 
 
         <StackPanel DockPanel.Dock="Bottom" HorizontalAlignment="Center" Orientation="Horizontal">
             <Image Style="{StaticResource Flechas}" Tag="Izquierda"></Image>
-            <TextBlock Margin="5,0" FontSize="18" x:Name="ConteoSuperHeroe" FontWeight="Bold">1/3</TextBlock>
+            <TextBlock Text="{Binding Path=Posicion}" Style="{StaticResource PosicionHeroe}"/>
+            <TextBlock Text="/" Style="{StaticResource PosicionHeroe}"/>
+            <TextBlock Text="{Binding Path=Total}" Style="{StaticResource PosicionHeroe}"></TextBlock>
             <Image Style="{StaticResource Flechas}" RenderTransformOrigin="0.5,0.5" Tag="Derecha">
                 <Image.RenderTransform>
                     <TransformGroup>
@@ -63,7 +69,7 @@
                 </Image.RenderTransform>
             </Image>
         </StackPanel>
-        <Image Margin="5" Source="{Binding Path=Imagen}" Stretch="UniformToFill"></Image>
+        <Image Margin="5" Source="{Binding Path=Personaje.Imagen}" Stretch="UniformToFill"></Image>
 
     </DockPanel>
 </Window>
