@@ -17,7 +17,6 @@
             <Setter Property="Height" Value="65"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
             <Setter Property="Margin" Value="5"/>
-
         </Style>
         <Style TargetType="{x:Type TextBlock}" x:Key="NombreSuperheroe">
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -40,10 +39,40 @@
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="FontWeight" Value="Bold"/>
         </Style>
+        
+        <Style TargetType="{x:Type Image}" x:Key="ImagenSuperHereo">
+            
+            <Setter Property="Opacity" Value="0.5"/>
+            <Setter Property="Stretch" Value="UniformToFill"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="1"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="{x:Type Border}" x:Key="BorderImagen">
+            <Setter Property="Margin" Value="5"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=ImagenSuperHeroe, Path=IsMouseOver}" Value="True">
+                    <Setter Property="BorderBrush" Value="Black"/>
+                    <Setter Property="BorderThickness" Value="4"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="{x:Type DockPanel}" x:Key="BackgroundDockPanel">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Personaje.Heroe}" Value="True">
+                    <Setter Property="Background" Value="PaleGreen"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=Personaje.Heroe}" Value="False">
+                    <Setter Property="Background" Value="IndianRed"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
 
     </Window.Resources>
 
-    <DockPanel x:Name="DockPanelSuperheroes" Background="{Binding Path=Personaje.Heroe, Converter={StaticResource CambiarBackground}}">
+    <DockPanel x:Name="DockPanelSuperheroes" Style="{StaticResource BackgroundDockPanel}">
         <DockPanel DockPanel.Dock="Top" LastChildFill="False" Margin="5,0">
             <TextBlock DockPanel.Dock="Left" Style="{StaticResource NombreSuperheroe}" Text="{Binding Path=Personaje.Nombre}" x:Name="NombreSuperheroe"></TextBlock>
             <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
@@ -69,7 +98,10 @@
                 </Image.RenderTransform>
             </Image>
         </StackPanel>
-        <Image Margin="5" Source="{Binding Path=Personaje.Imagen}" Stretch="UniformToFill"></Image>
+        <Border Style="{StaticResource BorderImagen}">
+            <Image Style="{StaticResource ImagenSuperHereo}" Source="{Binding Path=Personaje.Imagen}" x:Name="ImagenSuperHeroe"></Image>
+        </Border>
+        
 
     </DockPanel>
 </Window>

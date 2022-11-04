@@ -46,7 +46,7 @@ namespace Superheroes.VistaModelo
             }
         }
 
-        List<Superheroe> listaSuperheroe = Superheroe.GetSamples();
+        private List<Superheroe> listaSuperheroe = Superheroe.GetSamples();
 
         public MainWindowVM()
         {
