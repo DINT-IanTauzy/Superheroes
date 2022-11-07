@@ -90,7 +90,7 @@
             </Style.Triggers>
         </Style>
         
-        <!--Estilo y Trigger del borde de la imagen del SuperHeroe-->
+        <!--Estilo y Trigger del BORDE de la imagen del SuperHeroe-->
         <Style TargetType="{x:Type Border}" x:Key="BorderImagen">
             <Setter Property="Margin" Value="5"/>
             <Style.Triggers>
