@@ -9,15 +9,33 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Icon="./Recursos/shield.ico">
     <Window.Resources>
-        <convertidor:ConvertidorBackground x:Key="CambiarBackground"></convertidor:ConvertidorBackground>
-        <convertidor:ConvertidorImagen x:Key="ConverterImagen"></convertidor:ConvertidorImagen>
+        
         
         <Style TargetType="{x:Type Image}" x:Key="LogosImagenes">
             <Setter Property="Width" Value="65"/>
             <Setter Property="Height" Value="65"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
             <Setter Property="Margin" Value="5"/>
+            <Setter Property="Visibility" Value="Collapsed"/>
         </Style>
+
+        <Style TargetType="{x:Type Image}" x:Key="LogoVengador" BasedOn="{StaticResource LogosImagenes}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Personaje.Vengador}" Value="True">
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        
+        <Style TargetType="{x:Type Image}" x:Key="LogoXmen" BasedOn="{StaticResource LogosImagenes}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Personaje.Xmen}" Value="True">
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        
+        
         <Style TargetType="{x:Type TextBlock}" x:Key="NombreSuperheroe">
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Margin" Value="5"/>
@@ -29,6 +47,22 @@
                     <DropShadowEffect></DropShadowEffect>
                 </Setter.Value>
             </Setter>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="FontSize" To="70" Duration="0:0:3"></DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="FontSize" To="30" Duration="0:0:3"></DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
         </Style>
         <Style TargetType="{x:Type Image}" x:Key="Flechas">
             <Setter Property="Width" Value="20"/>
@@ -76,8 +110,8 @@
         <DockPanel DockPanel.Dock="Top" LastChildFill="False" Margin="5,0">
             <TextBlock DockPanel.Dock="Left" Style="{StaticResource NombreSuperheroe}" Text="{Binding Path=Personaje.Nombre}" x:Name="NombreSuperheroe"></TextBlock>
             <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
-                <Image Source="./Recursos/avengers.png" Style="{StaticResource LogosImagenes}" Visibility="{Binding Path=Personaje.Vengador, Converter={StaticResource ConverterImagen}}"></Image>
-                <Image Source="./Recursos/xmen.png" Style="{StaticResource LogosImagenes}" Visibility="{Binding Path=Personaje.Xmen, Converter={StaticResource ConverterImagen}}"></Image>
+                <Image Source="./Recursos/avengers.png" Style="{StaticResource LogoVengador}"></Image>
+                <Image Source="./Recursos/xmen.png" Style="{StaticResource LogoXmen}"></Image>
             </StackPanel>
         </DockPanel>
 
