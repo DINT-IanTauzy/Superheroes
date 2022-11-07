@@ -7,10 +7,9 @@
         xmlns:convertidor="clr-namespace:Superheroes.Convertidores"
         
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Icon="./Recursos/shield.ico">
+        Title="SuperHeroe" Height="450" Width="800" Icon="./Recursos/shield.ico">
     <Window.Resources>
-        
-        
+        <!--Estilo para los dos logos-->
         <Style TargetType="{x:Type Image}" x:Key="LogosImagenes">
             <Setter Property="Width" Value="65"/>
             <Setter Property="Height" Value="65"/>
@@ -18,7 +17,8 @@
             <Setter Property="Margin" Value="5"/>
             <Setter Property="Visibility" Value="Collapsed"/>
         </Style>
-
+        
+        <!--Trigger Logo Vengador-->
         <Style TargetType="{x:Type Image}" x:Key="LogoVengador" BasedOn="{StaticResource LogosImagenes}">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Path=Personaje.Vengador}" Value="True">
@@ -27,6 +27,7 @@
             </Style.Triggers>
         </Style>
         
+        <!--Trigger Logo Xmen-->
         <Style TargetType="{x:Type Image}" x:Key="LogoXmen" BasedOn="{StaticResource LogosImagenes}">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Path=Personaje.Xmen}" Value="True">
@@ -34,8 +35,8 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-        
-        
+
+        <!--Estilo y Trigger Nombre SuperHeroe-->
         <Style TargetType="{x:Type TextBlock}" x:Key="NombreSuperheroe">
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Margin" Value="5"/>
@@ -64,18 +65,22 @@
                 </EventTrigger>
             </Style.Triggers>
         </Style>
+        
+        <!--Estilo Imagenes Flechas-->
         <Style TargetType="{x:Type Image}" x:Key="Flechas">
             <Setter Property="Width" Value="20"/>
             <Setter Property="Source" Value="./Recursos/arrow.png"/>
             <EventSetter Event="MouseLeftButtonUp" Handler="Event_MouseLeftButtonUp"/>
         </Style>
+        
+        <!--Estilo para saber la posicion del SuperHeroe-->
         <Style TargetType="{x:Type TextBlock}" x:Key="PosicionHeroe">
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="FontWeight" Value="Bold"/>
         </Style>
-        
+
+        <!--Estio y Trigger de la Imagen SuperHeroe-->
         <Style TargetType="{x:Type Image}" x:Key="ImagenSuperHereo">
-            
             <Setter Property="Opacity" Value="0.5"/>
             <Setter Property="Stretch" Value="UniformToFill"/>
             <Style.Triggers>
@@ -84,6 +89,8 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        
+        <!--Estilo y Trigger del borde de la imagen del SuperHeroe-->
         <Style TargetType="{x:Type Border}" x:Key="BorderImagen">
             <Setter Property="Margin" Value="5"/>
             <Style.Triggers>
@@ -93,6 +100,8 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
+        
+        <!--Trigger para cambiar el background del DockPanel-->
         <Style TargetType="{x:Type DockPanel}" x:Key="BackgroundDockPanel">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Path=Personaje.Heroe}" Value="True">
@@ -103,7 +112,6 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-
     </Window.Resources>
 
     <DockPanel x:Name="DockPanelSuperheroes" Style="{StaticResource BackgroundDockPanel}">
@@ -114,7 +122,6 @@
                 <Image Source="./Recursos/xmen.png" Style="{StaticResource LogoXmen}"></Image>
             </StackPanel>
         </DockPanel>
-
 
         <StackPanel DockPanel.Dock="Bottom" HorizontalAlignment="Center" Orientation="Horizontal">
             <Image Style="{StaticResource Flechas}" Tag="Izquierda"></Image>
@@ -135,7 +142,5 @@
         <Border Style="{StaticResource BorderImagen}">
             <Image Style="{StaticResource ImagenSuperHereo}" Source="{Binding Path=Personaje.Imagen}" x:Name="ImagenSuperHeroe"></Image>
         </Border>
-        
-
     </DockPanel>
 </Window>
