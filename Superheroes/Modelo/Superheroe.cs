@@ -1,10 +1,12 @@
+using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 
 namespace Superheroes.Modelo
 {
-    class Superheroe : INotifyPropertyChanged
+    class Superheroe : ObservableObject
     {
         private string nombre;
         private string imagen;
@@ -20,55 +22,51 @@ namespace Superheroes.Modelo
                 if (this.nombre != value)
                 {
                     this.nombre = value;
-                    this.NotifyPropertyChanged("Nombre");
+
                 }
             }
         }
         public string Imagen
         {
-            get => imagen; 
+            get => imagen;
             set
             {
                 if (this.imagen != value)
                 {
                     this.imagen = value;
-                    this.NotifyPropertyChanged("Imagen");
                 }
             }
         }
         public bool Vengador
         {
-            get => vengador; 
+            get => vengador;
             set
             {
                 if (this.vengador != value)
                 {
                     this.vengador = value;
-                    this.NotifyPropertyChanged("Vengador");
                 }
             }
         }
         public bool Xmen
         {
-            get => xmen; 
+            get => xmen;
             set
             {
                 if (this.xmen != value)
                 {
                     this.xmen = value;
-                    this.NotifyPropertyChanged("Xmen");
                 }
             }
         }
         public bool Heroe
         {
-            get => heroe; 
+            get => heroe;
             set
             {
                 if (this.heroe != value)
                 {
                     this.heroe = value;
-                    this.NotifyPropertyChanged("Heroe");
                 }
             }
         }
@@ -86,16 +84,11 @@ namespace Superheroes.Modelo
             Heroe = heroe;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
 
-        public void NotifyPropertyChanged(string propertyName)
-        {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
 
-        public static List<Superheroe> GetSamples()
+        public static ObservableCollection<Superheroe> GetSamples()
         {
-            List<Superheroe> ejemplos = new List<Superheroe>();
+            ObservableCollection<Superheroe> ejemplos = new ObservableCollection<Superheroe>();
 
             Superheroe ironman = new Superheroe("Ironman", @"https://dossierinteractivo.com/wp-content/uploads/2021/01/Iron-Man.png", true, false, true);
             Superheroe kingpin = new Superheroe("Kingpin", @"https://www.comicbasics.com/wp-content/uploads/2017/09/Kingpin.jpg", false, false, false);
